@@ -1,66 +1,114 @@
-# Save Tabs Extension / タブ保存拡張機能
+# タブ保存拡張機能
 
-This VS Code extension allows you to save and manage paths of all currently open tabs in a workspace to a timestamped text file. You can later reopen tabs from any saved session or clear saved tab records.  
 このVS Code拡張機能では、現在開いているすべてのタブのパスをタイムスタンプ付きのテキストファイルに保存できます。保存したセッションからタブを再度開いたり、記録を削除したりできます。
 
-## Features / 機能
+## 機能
 
-- **Save Open Tabs**: Save paths of all open tabs to a timestamped file in a `.openTabs` folder within the workspace root.  
-  **タブの保存**：ワークスペースルートにある`.openTabs`フォルダに、すべての開いているタブのパスをタイムスタンプ付きで保存します。
+- **タブの保存**：ワークスペースルートにある`.openTabs`フォルダに、すべての開いているタブのパスをタイムスタンプ付きで保存します。
 
-- **Reopen Saved Tabs**: Restore tabs from a previous session by selecting a saved file.  
-  **タブの再オープン**：保存されたファイルを選択することで、前のセッションのタブを復元できます。
+- **タブの再オープン**：保存されたファイルを選択することで、前のセッションのタブを復元できます。
 
-- **Clear Saved Tab Records**: Clear all saved tab files within the `.openTabs` folder.  
-  **保存記録のクリア**：`.openTabs`フォルダ内のすべての保存済みタブファイルを削除します。
+- **保存記録のクリア**：`.openTabs`フォルダ内のすべての保存済みタブファイルを削除します。
 
-## Usage / 使用方法
+## 使用方法
 
-1. **Open the Command Palette** (`Ctrl+Shift+P` or `Cmd+Shift+P` on macOS).  
-   **コマンドパレットを開く**（Windowsは`Ctrl+Shift+P`、macOSは`Cmd+Shift+P`）
+1. **コマンドパレットを開く**（Windowsは`Ctrl+Shift+P`、macOSは`Cmd+Shift+P`）
 
 2. **Run a Command**:  
    **コマンドの実行**：
 
-   - **Save Open Tabs**: Save paths of all open tabs to a `.txt` file in the `.openTabs` folder.  
-     **開いているタブの保存**：`.openTabs`フォルダにすべての開いているタブのパスを保存します。
+   - **開いているタブの保存**：`.openTabs`フォルダにすべての開いているタブのパスを保存します。
 
-   - **Open Saved Tabs**: Select a saved file to reopen previously saved tabs.  
-     **保存したタブを開く**：保存したファイルを選択し、過去のセッションのタブを再度開きます。
+   - **保存したタブを開く**：保存したファイルを選択し、過去のセッションのタブを再度開きます。
 
-   - **Clear Saved Tabs**: Delete all saved tab records in the `.openTabs` folder.  
-     **保存タブのクリア**：`.openTabs`フォルダ内のすべての保存済みタブ記録を削除します。
+   - **保存タブのクリア**：`.openTabs`フォルダ内のすべての保存済みタブ記録を削除します。
 
-## File Management / ファイル管理
+## ファイル管理
 
-- Saved files are stored in `.openTabs` within the workspace root, named by timestamp in `YYYYMMDDHHMMSS.txt` format.  
-  保存ファイルは、ワークスペースのルートにある`.openTabs`フォルダ内に`YYYYMMDDHHMMSS.txt`形式で保存されます。
+- **ファイル作成**: 保存ファイルは、ワークスペースのルートにある`.openTabs`フォルダ内に`YYYYMMDDHHMMSS.txt`形式で保存されます。
 
-- **Automatic Folder Creation**: The `.openTabs` folder is automatically created if it doesn't exist.  
-  **フォルダの自動生成**：`.openTabs`フォルダが存在しない場合は、自動的に作成されます。
+- **フォルダの自動生成**：`.openTabs`フォルダが存在しない場合は、自動的に作成されます。
 
-## Requirements / 必要条件
+## 開発者向け
 
-No additional dependencies are required.  
-追加の依存関係は必要ありません。
+### 環境構築
 
-## Extension Settings / 拡張設定
+- **Node.js**: バージョン20以上  
+- **npm**: バージョン10以上
 
-This extension does not require any settings configuration.  
-この拡張機能には設定の構成は不要です。
+```bash
+> node -v
+v20.17.0
+> npm -v
+10.8.2
+```
 
-## Known Issues / 既知の問題
+- プロジェクトのクローン
 
-- Unsaved documents are not stored in saved files and will not be reopened if closed.  
-  未保存のドキュメントは保存ファイルに記録されないため、閉じられた場合は再オープンされません。
+```bash
+git clone https://github.com/ryomeblog/savetabs.git
+cd savetabs
+```
 
-## Release Notes / リリースノート
+- 依存関係のインストール
 
-### 0.1.0
+```bash
+npm ci
+npm install -g vsce
+```
 
-- Initial release with tab saving, reopening, and clearing features.  
-  タブの保存、再オープン、クリア機能を備えた初期リリース
+### 開発手順
 
----
+1. `src/extension.ts` ファイルを修正する
 
-This extension is open-source and welcomes contributions!
+2. `npm run compile` コマンドを実行
+
+```bash
+npm run compile
+```
+
+3. `vsix` ファイルを作成
+
+```bash
+vsce package
+```
+
+### フォルダ構成
+
+```
+savetabs
+├── .vscode
+│   ├── extensions.json
+│   └── launch.json
+├── src
+│   └── extension.ts
+├── .gitignore
+├── .vscode-test.mjs
+├── .vscodeignore
+├── CHANGELOG.md
+├── eslint.config.mjs
+├── package.json
+├── package-lock.json
+├── README.md
+├── vsc-extension-quickstart.md
+└── tsconfig.json
+```
+
+### `.vscode` フォルダ
+- **extensions.json**: 推奨するVSCode拡張機能のリストを定義します。プロジェクトに必要な拡張機能をチームメンバーに共有するために使用されます。
+- **launch.json**: デバッグ設定を定義します。拡張機能のデバッグを行う際に使用されます。
+
+### `src` フォルダ
+- **extension.ts**: 拡張機能のメインコードが含まれています。ここに拡張機能のロジックを実装します。
+
+### ルートディレクトリ
+- **.gitignore**: Gitで管理しないファイルやフォルダを指定します。例えば、ビルド成果物や環境設定ファイルなどが含まれます。
+- **.vscode-test.mjs**: VSCodeのテストランナーの設定ファイルです。拡張機能のテストを実行するために使用されます。
+- **.vscodeignore**: VSCode拡張機能のパッケージに含めないファイルやフォルダを指定します。例えば、テストファイルやドキュメントなどが含まれます。
+- **CHANGELOG.md**: 拡張機能の変更履歴を記載します。バージョンごとの変更点や修正内容を記録します。
+- **eslint.config.mjs**: ESLintの設定ファイルです。コードの品質を保つためのルールを定義します。
+- **package.json**: プロジェクトのメタデータや依存関係、スクリプトなどを定義します。拡張機能の設定やコマンドもここに記述します。
+- **package-lock.json**: 依存関係のバージョンを固定するためのファイルです。プロジェクトの依存関係を一貫して管理します。
+- **README.md**: プロジェクトの概要や使用方法、インストール手順などを記載します。プロジェクトのドキュメントとして機能します。
+- **vsc-extension-quickstart.md**: 拡張機能のクイックスタートガイドです。拡張機能の開発を始めるための基本的な手順が記載されています。
+- **tsconfig.json**: TypeScriptのコンパイルオプションを定義します。TypeScriptコードをJavaScriptに変換する際の設定を行います。
