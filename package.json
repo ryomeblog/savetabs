@@ -2,7 +2,7 @@
   "name": "savetabs",
   "displayName": "saveTabs",
   "description": "",
-  "version": "0.0.1",
+  "version": "0.1.1",
   "engines": {
     "vscode": "^1.93.1"
   },
